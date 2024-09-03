@@ -103,15 +103,16 @@ if __name__ == "__main__":
 
     if not relevancy_check(retrieved_docs, query):
         print("No relevant documents found.")
+        return
 
-    answer = ""
     for _ in range(2):
         answer = get_answer_from_docs(query, retrieved_docs)
+        
         if not check_hallucination(answer, query):
-            break
+            print(f"Query: {query}\n")
+            print(f"Answer: {answer}\n")
+            print("Referred Documents:")
+            for doc in retrieved_docs:
+                print(doc.metadata['source'])
 
-    print(f"Query: {query}\n")
-    print(f"Answer: {answer}\n")
-    print("Referred Documents:")
-    for doc in retrieved_docs:
-        print(doc.metadata['source'])
+    
