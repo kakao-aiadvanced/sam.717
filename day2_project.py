@@ -84,12 +84,12 @@ def check_hallucination(answer: str, query: str) -> bool:
     parser = JsonOutputParser()
     prompt = PromptTemplate(
         template="Answer yes or no to whether answer has \"hallucinated\" the question.\n{format_instructions}\n",
-        input_variables=["answer", "query"],
+        input_variables=["answer", "question"],
         partial_variables={"format_instructions": parser.get_format_instructions()},
     )
 
     chain = prompt | llm | parser
-    anwser = chain.invoke({"answer": query, "query": query})
+    anwser = chain.invoke({"answer": query, "question": query})
 
     return anwser["hallucinated"] == "yes"
 
