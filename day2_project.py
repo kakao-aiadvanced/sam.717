@@ -114,5 +114,6 @@ if __name__ == "__main__":
             print("Referred Documents:")
             for doc in retrieved_docs:
                 print(doc.metadata['source'])
+            break
 
     
